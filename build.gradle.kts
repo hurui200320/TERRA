@@ -21,6 +21,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.2.3")
     implementation("org.bitlet:weupnp:0.1.4")
 //    implementation("com.offbynull.portmapper:portmapper:2.0.5")
+    implementation("com.google.code.gson:gson:2.8.6")
 
 }
 

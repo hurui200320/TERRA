@@ -1,5 +1,5 @@
 # TERRA
-TERRA: Java implementation of Kademlia DHT client.
+TERRA: A Kotlin implementation of Kademlia DHT client.
 
 ## Current state
 + Using weupnp as upnp lib. Worked with NETGEAR R7800.
