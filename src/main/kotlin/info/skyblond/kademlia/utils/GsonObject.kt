@@ -22,6 +22,8 @@ object GsonObject {
             }
         })
 
+        gsonBuilder.setPrettyPrinting()
+
         // create gson obj
         gson = gsonBuilder.create()
     }

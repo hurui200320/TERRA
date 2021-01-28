@@ -1,11 +1,11 @@
 package info.skyblond.kademlia.node
 
-import com.google.gson.JsonDeserializer
-import com.google.gson.JsonSerializer
 import info.skyblond.kademlia.utils.hexStringToByteArray
 import info.skyblond.kademlia.utils.toHexString
 import info.skyblond.kademlia.utils.update
 import java.math.BigInteger
+import java.util.*
+import kotlin.experimental.and
 import kotlin.experimental.xor
 import kotlin.random.Random
 
@@ -26,21 +26,6 @@ class KademliaId {
 
         init {
             require(ID_LENGTH % Byte.SIZE_BITS == 0) { "ID_LENGTH must be a multiple of ${Byte.SIZE_BITS}" }
-        }
-
-        /**
-         * Get a comparator with third key. This will compare the distances between the third key.
-         * Useful when finding the closest key to a specific key(as the third key).
-         * Compare with null is not defined.
-         *
-         * By specify target is all zero, it's compare two key with absolut value.
-         * */
-        fun getComparator(target: KademliaId): Comparator<KademliaId> = Comparator { o1, o2 ->
-            // b1, b2 should be positive number, ensured by toBigInteger()
-            val b1: BigInteger = o1.xor(target).toBigInteger()
-            val b2: BigInteger = o2.xor(target).toBigInteger()
-
-            b1.compareTo(b2)
         }
     }
 
@@ -103,14 +88,66 @@ class KademliaId {
      * */
     fun toBigInteger(): BigInteger = BigInteger(1, this.bytes)
 
+    /**
+     * Count the leading zero in bit
+     * */
+    fun countLeadingZero(): Int {
+        return this.bytes.takeWhile {
+            it.toInt() and 0x80 == 0
+        }.sumBy {
+            for ((count, i) in (0..7).withIndex()) {
+                val currentBit = it.toInt() and (0x80 shr i)
+                if (currentBit != 0) {
+                    return@sumBy count
+                }
+            }
+            8
+        }
+    }
+
     /*
     * TODO:
     *  Custom Serializable? - Have to transmitted by UDP, then it need a way to become bytes
-    *  generateNodeIdByDistance - Generate ID by some given distance to this ID, xor to flip bits
-    *  getDistance - Count the distance in the Tree by level(or height), i.e. id length - count of leading zeros of the result of xor
-    *   | this should be implemented in [Node] class.
     *  Test case
     * */
+
+    /**
+     * Generate new id by a given distance
+     * */
+    fun generateIdByDistance(distance: Int): KademliaId {
+        val result = this.bytes.copyOf()
+        // make result[0] the lower bytes
+        result.reverse()
+
+        // Change distance by flipping lower bits
+        val bytesFlipCount = distance / 8
+        val bitsFlipCount = distance % 8
+        // flip big chunk
+        for (i in 0 until bytesFlipCount) {
+            result[i] = result[i] xor (0b11111111.toByte())
+        }
+
+        if (bitsFlipCount != 0) {
+            // then flip small bits
+            val tmp = when(bitsFlipCount){
+                1 -> 0b00000001.toByte()
+                2 -> 0b00000011.toByte()
+                3 -> 0b00000111.toByte()
+                4 -> 0b00001111.toByte()
+                5 -> 0b00011111.toByte()
+                6 -> 0b00111111.toByte()
+                7 -> 0b01111111.toByte()
+                else -> error("Unexpected bitsFlipCount value: $bitsFlipCount, should in range of 0..7")
+            }
+
+            result[bytesFlipCount] = result[bytesFlipCount] xor tmp
+        }
+
+        // reverse back
+        result.reverse()
+
+        return KademliaId(result)
+    }
 
     /**
      * Only the internal bytes are compared if same.

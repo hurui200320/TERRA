@@ -5,22 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa93e18c-beea-4acc-b6fa-91450d432d93" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/KademliaConfig.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/node/KademliaId.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/node/Node.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/routing/KademliaBucket.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/routing/Route.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/utils/GsonObject.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/utils/HexStringExtension.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/info/skyblond/kademlia/routing/RouteTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/info/skyblond/kademlia/utils/GsonObjectTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/info/skyblond/kademlia/utils/HexStringExtensionKtTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/http/KadNodeHttpClient.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/http/KadNodeHttpServer.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/routing/KademliaRoutingTable.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/rpc/KademliaRPC.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/utils/SequentialTreeSet.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/kotlin/info/skyblond/kademlia/TestKadNodeHttp.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/kotlin/info/skyblond/kademlia/routing/KademliaRoutingTableTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/logback.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/KademliaConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/KademliaConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/node/KademliaId.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/node/KademliaId.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/node/Node.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/node/Node.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/routing/KademliaBucket.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/routing/KademliaBucket.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/routing/Route.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/routing/Route.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/utils/GsonObject.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/info/skyblond/kademlia/utils/GsonObject.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,8 +72,8 @@
       <list>
         <option value="Kotlin File" />
         <option value="Kotlin Object" />
-        <option value="Kotlin Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -120,7 +121,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/kotlin/info/skyblond/kademlia/routing" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/test/resources" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -135,10 +136,14 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Gits\GitHub\TERRA\src\test\resources" />
       <recent name="D:\Gits\GitHub\TERRA\src\main\resources" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="info.skyblond.kademlia.http" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -154,7 +159,7 @@
       <command value="gradle build -Xlint:deprecation -Xlint:unchecked " />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.KademliaBucketTest.insert">
+  <component name="RunManager" selected="Gradle.TestKadNodeHttp.main">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -166,12 +171,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="KademliaBucketTest.insert" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="KademliaRoutingTableTest.genIdTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;info.skyblond.kademlia.routing.KademliaBucketTest.insert&quot;" />
+        <option name="scriptParameters" value="--tests &quot;info.skyblond.kademlia.routing.KademliaRoutingTableTest.genIdTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -187,12 +192,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="RouteTest.increaseStaleCount" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="KademliaRoutingTableTest.mainTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;info.skyblond.kademlia.routing.RouteTest.increaseStaleCount&quot;" />
+        <option name="scriptParameters" value="--tests &quot;info.skyblond.kademlia.routing.KademliaRoutingTableTest.mainTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -208,12 +213,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="RouteTest.refreshLastSeen" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="KademliaRoutingTableTest.removeTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;info.skyblond.kademlia.routing.RouteTest.refreshLastSeen&quot;" />
+        <option name="scriptParameters" value="--tests &quot;info.skyblond.kademlia.routing.KademliaRoutingTableTest.removeTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -229,12 +234,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="RouteTest.testCompare" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TestKadNodeHttp.main" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;info.skyblond.kademlia.routing.RouteTest.testCompare&quot;" />
+        <option name="scriptParameters" value="--tests &quot;info.skyblond.kademlia.TestKadNodeHttp.main&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -250,33 +255,33 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <module name="TERRA.main" />
+    <configuration name="TestKademliaKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="TERRA.test" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" value="MainKt" />
+      <option name="MAIN_CLASS_NAME" value="TestKademliaKt" />
       <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.MainKt" />
-      <item itemvalue="Gradle.RouteTest.refreshLastSeen" />
-      <item itemvalue="Gradle.RouteTest.increaseStaleCount" />
-      <item itemvalue="Gradle.RouteTest.testCompare" />
-      <item itemvalue="Gradle.KademliaBucketTest.insert" />
+      <item itemvalue="Gradle.KademliaRoutingTableTest.mainTest" />
+      <item itemvalue="Gradle.KademliaRoutingTableTest.genIdTest" />
+      <item itemvalue="Gradle.KademliaRoutingTableTest.removeTest" />
+      <item itemvalue="Application.TestKademliaKt" />
+      <item itemvalue="Gradle.TestKadNodeHttp.main" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.KademliaBucketTest.insert" />
-        <item itemvalue="Gradle.RouteTest.testCompare" />
-        <item itemvalue="Gradle.RouteTest.increaseStaleCount" />
-        <item itemvalue="Gradle.RouteTest.refreshLastSeen" />
-        <item itemvalue="Application.MainKt" />
+        <item itemvalue="Gradle.TestKadNodeHttp.main" />
+        <item itemvalue="Gradle.KademliaRoutingTableTest.removeTest" />
+        <item itemvalue="Gradle.KademliaRoutingTableTest.genIdTest" />
+        <item itemvalue="Gradle.KademliaRoutingTableTest.mainTest" />
+        <item itemvalue="Application.TestKademliaKt" />
       </list>
     </recent_temporary>
   </component>
@@ -291,7 +296,10 @@
       <workItem from="1610802346490" duration="8430000" />
       <workItem from="1611221080613" duration="4010000" />
       <workItem from="1611300169595" duration="11536000" />
-      <workItem from="1611564434999" duration="11959000" />
+      <workItem from="1611564434999" duration="21736000" />
+      <workItem from="1611714804850" duration="14335000" />
+      <workItem from="1611738716417" duration="102000" />
+      <workItem from="1611738951704" duration="9406000" />
     </task>
     <servers />
   </component>

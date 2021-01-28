@@ -22,7 +22,8 @@ dependencies {
     implementation("org.bitlet:weupnp:0.1.4")
 //    implementation("com.offbynull.portmapper:portmapper:2.0.5")
     implementation("com.google.code.gson:gson:2.8.6")
-
+    implementation("io.javalin:javalin:3.13.0")
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
 }
 
 tasks.test {

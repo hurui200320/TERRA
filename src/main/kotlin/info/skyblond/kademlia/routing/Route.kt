@@ -9,14 +9,13 @@ class Route(
     /**
      * Internal node reference
      * */
-    val node: Node
-) : Comparable<Route> {
+    val node: Node,
+
     /**
      * Last seen by timestamp(in the unit of second)
      * */
     var lastSeen: Long = System.currentTimeMillis() / 1000
-        private set
-
+) : Comparable<Route> {
     /**
      * Update [lastSeen] with current timestamp
      * */
@@ -69,17 +68,21 @@ class Route(
      * Routes are compared as follow(When sorted asc by default):
      * 1. The most recent see one is the biggest(set at the bottom of k-bucket)
      * 2. The least recent see one is the smallest(set on top of k-bucket)
+     * 3. Only two route with same node are same(return 0 by this function)
      * Thus, one with smaller [lastSeen] is considering smaller
      * */
     override fun compareTo(other: Route): Int {
-        return if (this.node == other.node)
-            0
-        else
-            this.lastSeen.compareTo(other.lastSeen)
+        return when {
+            this.node == other.node -> 0
+            // Note: We can't simply return `this.lastSeen.compareTo(other.lastSeen)`
+            // Since that might be same, but not means two routes are same
+            this.lastSeen > other.lastSeen -> 1
+            else -> -1
+        }
     }
 
     override fun toString(): String {
-        return "Route(node=$node, lastSeen=$lastSeen, staleCount=$staleCount)"
+        return "Route(node=${node.nodeId.hexString}, lastSeen=$lastSeen, staleCount=$staleCount)"
     }
 
     companion object {

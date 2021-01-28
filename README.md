@@ -1,6 +1,13 @@
 # TERRA
 TERRA: A Kotlin implementation of Kademlia DHT client.
 
-## Current state
-+ Using weupnp as upnp lib. Worked with NETGEAR R7800.
-+ Might try https://github.com/offbynull/portmapper
+## Done
++ Tested upnp lib, worked with my NETGEAR R7800.
+
+## WIP
++ Kademlia over HTTP for an intuitive demonstration
+    + Kademlia Routing and RPCs
+    
+## TODO
++ Kademlia store and DHT things
++ Kademlia over udp

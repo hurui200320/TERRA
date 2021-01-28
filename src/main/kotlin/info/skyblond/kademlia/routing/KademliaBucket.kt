@@ -2,6 +2,8 @@ package info.skyblond.kademlia.routing
 
 import info.skyblond.kademlia.KademliaConfig
 import info.skyblond.kademlia.node.Node
+import info.skyblond.kademlia.utils.SequentialTreeSet
+import org.slf4j.LoggerFactory
 import java.util.*
 import kotlin.NoSuchElementException
 
@@ -16,14 +18,14 @@ class KademliaBucket(
     val depth: Int
 ) {
     /**
-     * Routes stored in this routing table
+     * Routes stored in this routing table, least recent seen route set on top
      * */
-    private val routes: TreeSet<Route> = TreeSet<Route>()
+    private val routes: SequentialTreeSet<Route> = SequentialTreeSet()
 
     /**
-     * store new seen routes when k-bucket is full
+     * store new seen routes when k-bucket is full, least recent seen route set on top
      * */
-    private val replacementCache: TreeSet<Route> = TreeSet<Route>()
+    private val replacementCache: SequentialTreeSet<Route> = SequentialTreeSet()
 
     /**
      * Insert a new route into the set.
@@ -45,7 +47,8 @@ class KademliaBucket(
                 this.insertIntoReplacementCache(route)
                 // check if any stale nodes can be replaced
                 // first take the node should be replaced
-                val deleted = this.routes.filter { it.staleCount > KademliaConfig.STALE_TOLERANCE }
+                val deleted = this.routes
+                    .filter { it.staleCount > 0 }
                     .sortedByDescending { it.staleCount }
                     .take(this.replacementCache.size)
                 // remove those from routes
@@ -85,7 +88,6 @@ class KademliaBucket(
      * */
     @Synchronized
     fun containsNode(node: Node): Boolean {
-        // Route with same node should considering the same
         return containsRoute(Route(node))
     }
 
@@ -96,18 +98,18 @@ class KademliaBucket(
      * */
     @Synchronized
     fun removeRoute(route: Route): Boolean {
-        // not exists
-        if (!this.routes.contains(route))
+        if (!this.routes.contains(route)) {
+            // not exists
             return false
-
+        }
         if (replacementCache.isEmpty()) {
             // replacement cache is empty, update stale count
             // must find the one **in the set** with the same id
-            this.getFromRoutes(route.node).increaseStaleCount()
+            this.routes.find { it.node == route.node }!!.increaseStaleCount()
         } else {
             // pick one from replacement cache to replace it
             this.routes.remove(route)
-            val tmp = replacementCache.first()
+            val tmp = replacementCache.last()
             this.routes.add(tmp)
             replacementCache.remove(tmp)
         }
@@ -116,16 +118,8 @@ class KademliaBucket(
     }
 
     /**
-     * Get a route from routes set
-     * */
-    @Synchronized
-    private fun getFromRoutes(node: Node): Route {
-        return this.routes.find { it.node == node }
-            ?: throw NoSuchElementException("The route does not exist in the routes set.")
-    }
-
-    /**
-     * Remove a route from routes set
+     * Remove a route from routes set.
+     * Identical to `this.routes.remove`, but return the obj deleted.
      * @return the route has been deleted
      * */
     @Synchronized
@@ -135,7 +129,6 @@ class KademliaBucket(
                 this.routes.remove(r)
                 return r
             }
-
         throw NoSuchElementException("The route does not exist in the routes set.")
     }
 
